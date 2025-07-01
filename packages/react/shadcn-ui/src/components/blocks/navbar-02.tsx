@@ -1,5 +1,5 @@
 import type { NavigationMenuProps } from "@radix-ui/react-navigation-menu";
-import { Menu } from "lucide-react";
+import { Menu, SunIcon } from "lucide-react";
 
 import { Button } from "@forthtilliath/shadcn-ui/components/button";
 import {
@@ -28,16 +28,20 @@ export function Navbar({ logo, render, items }: Props) {
   return (
     <nav className="h-16 bg-background border-b">
       <div className="h-full flex items-center justify-between max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        {logo}
+        <div className="flex items-center gap-8">
+          {logo}
 
-        {/* Desktop Menu */}
-        <NavMenu className="hidden md:block" render={render} items={items} />
+          {/* Desktop Menu */}
+          <NavMenu className="hidden md:block" render={render} items={items} />
+        </div>
 
         <div className="flex items-center gap-3">
           <Button variant="outline" className="hidden sm:inline-flex">
             Sign In
           </Button>
-          <Button>Get Started</Button>
+          <Button size="icon" variant="outline">
+            <SunIcon />
+          </Button>
 
           {/* Mobile Menu */}
           <div className="md:hidden">

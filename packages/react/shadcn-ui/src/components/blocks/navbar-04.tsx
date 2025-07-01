@@ -14,7 +14,7 @@ import {
   SheetTrigger,
 } from "@forthtilliath/shadcn-ui/components/sheet";
 
-interface Item {
+export interface Item {
   href: string;
   label: React.ReactNode;
 }
@@ -26,24 +26,27 @@ interface Props {
 
 export function Navbar({ logo, render, items }: Props) {
   return (
-    <nav className="h-16 bg-background border-b">
-      <div className="h-full flex items-center justify-between max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+    <nav className="fixed top-6 inset-x-4 h-16 bg-background border dark:border-slate-700/70 max-w-screen-xl mx-auto rounded-full">
+      <div className="h-full flex items-center justify-between mx-auto px-4">
         {logo}
 
         {/* Desktop Menu */}
         <NavMenu className="hidden md:block" render={render} items={items} />
 
         <div className="flex items-center gap-3">
-          <Button variant="outline" className="hidden sm:inline-flex">
+          <Button
+            variant="outline"
+            className="hidden sm:inline-flex rounded-full"
+          >
             Sign In
           </Button>
-          <Button>Get Started</Button>
+          <Button className="rounded-full">Get Started</Button>
 
           {/* Mobile Menu */}
           <div className="md:hidden">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon">
+                <Button variant="outline" size="icon" className="rounded-full">
                   <Menu />
                 </Button>
               </SheetTrigger>
@@ -68,10 +71,6 @@ type NavMenuProps = NavigationMenuProps & Pick<Props, "items" | "render">;
 const NavMenu = ({ render, items, ...props }: NavMenuProps) => (
   <NavigationMenu {...props}>
     <NavigationMenuList className="gap-6 space-x-0 data-[orientation=vertical]:flex-col data-[orientation=vertical]:items-start">
-      <NavigationMenuItem>
-        <NavigationMenuLink asChild></NavigationMenuLink>
-      </NavigationMenuItem>
-
       {items.map((item, i) => (
         <NavigationMenuItem key={i}>
           <NavigationMenuLink asChild>
